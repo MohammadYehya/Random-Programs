@@ -1,0 +1,68 @@
+Module Module1
+
+    Sub Main()
+        Dim UpBnd As Integer = 0
+        Dim lowBnd As Integer = 0
+        Dim Num As Integer = 0
+        Dim Guess As Integer = 0
+        Dim c As Integer = 0
+        Dim again As Boolean = True
+        Dim tAgain As String
+
+
+        Console.WriteLine("This is a game made to guess a number between the upper bound and lower bound.")
+        Console.WriteLine("Do you want to play?[Yes/No]")
+        tAgain = Console.ReadLine
+        tAgain = UCase(tAgain)
+        While tAgain <> "YES" And tAgain <> "NO"
+            Console.WriteLine("Please enter either Yes or No")
+            tAgain = Console.ReadLine
+            tAgain = UCase(tAgain)
+        End While
+        If tAgain = "YES" Then
+            again = True
+        Else : again = False
+        End If
+
+        While again = True
+
+            Console.Write("Please enter your lower bound : ")
+            lowBnd = Console.ReadLine
+            Console.Write("Please enter your upper bound : ")
+            UpBnd = Console.ReadLine
+
+            Randomize()
+            Num = Int((UpBnd - lowBnd + 1) * Rnd() + lowBnd)
+            Console.WriteLine("Now time to guess the number. You only have 10 tries")
+            For c = 1 To 10
+                Console.Write("Guess number" & c & " :")
+                Guess = Console.ReadLine
+                Select Case Guess
+                    Case Is < Num
+                        Console.WriteLine("The number is higher")
+                    Case Is > Num
+                        Console.WriteLine("The number is lower")
+                    Case Is = Num
+                        Console.WriteLine("Nice you guessed correctly")
+                        Exit For
+                End Select
+            Next
+            If Num <> Guess Then
+                Console.WriteLine("You lost! The number was " & Num & ". Better luck next time!")
+            End If
+            Console.WriteLine("Do you want to play again?[Yes/No]")
+            tAgain = Console.ReadLine
+            tAgain = UCase(tAgain)
+            While tAgain <> "YES" And tAgain <> "NO"
+                Console.WriteLine("Please enter either Yes or No")
+                tAgain = Console.ReadLine
+                tAgain = UCase(tAgain)
+            End While
+            If tAgain = "YES" Then
+                again = True
+            Else : again = False
+            End If
+        End While
+    End Sub
+
+End Module
